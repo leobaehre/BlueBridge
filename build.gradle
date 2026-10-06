@@ -6,25 +6,32 @@ plugins{
 subprojects {
 
     apply plugin: 'java'
+    apply plugin: 'idea'
 
-    version '2.3'
+    version = '2.4'
 
     //Add maintainers here (separated by a comma and space). This will be added to the plugin.yml.
     def authors = 'Mark_225'
 
-    sourceCompatibility = 21
-    targetCompatibility = 21
+    java {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
 
-    group 'de.mark225'
+    tasks.withType(JavaCompile).configureEach {
+        options.release = 21
+    }
+
+    group = 'de.mark225'
 
     repositories {
         mavenCentral()
-        maven { url "https://jitpack.io" }
+        maven { url = "https://jitpack.io" }
         maven {
             name = "papermc"
             url = uri("https://repo.papermc.io/repository/maven-public/")
         }
-        maven { url 'https://repo.bluecolored.de/releases' }
+        maven { url = 'https://repo.bluecolored.de/releases' }
     }
 
     configurations {
